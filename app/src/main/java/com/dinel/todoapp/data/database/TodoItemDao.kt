@@ -2,7 +2,6 @@ package com.dinel.todoapp.data.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.todolist.data.database.TodoItem
 
 
 @Dao

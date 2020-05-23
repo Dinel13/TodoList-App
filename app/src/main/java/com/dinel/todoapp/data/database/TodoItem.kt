@@ -1,4 +1,4 @@
-package com.example.todolist.data.database
+package com.dinel.todoapp.data.database
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo
