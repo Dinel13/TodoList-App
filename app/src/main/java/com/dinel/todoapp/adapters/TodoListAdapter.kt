@@ -43,17 +43,12 @@ class TodoListAdapter(todoItemClickListener: TodoItemClickListener) :
                 } else {
                     val filteredList = arrayListOf<TodoItem>()
                     for (item in todoItemList) {
-                        if (item.description?.toLowerCase(Locale.getDefault())!!.contains(
+                        if (item.title.toLowerCase(Locale.getDefault()).contains(
                                 charString.toLowerCase(
                                     Locale.getDefault()
                                 )
                             )
-                            || item.title.toLowerCase(Locale.getDefault()).contains(
-                                charString.toLowerCase(
-                                    Locale.getDefault()
-                                )
-                            )
-                            || item.tags?.toLowerCase(Locale.getDefault())!!.contains(
+                            || item.note?.toLowerCase(Locale.getDefault())!!.contains(
                                 charString.toLowerCase(
                                     Locale.getDefault()
                                 )

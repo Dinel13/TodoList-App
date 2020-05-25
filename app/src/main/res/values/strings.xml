@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">todoApp</string>
+    <string name="due_date_minute_less_than_ten">%1$s %2$d %3$d %4$d:0%5$d</string>
+    <string name="due_date_minute_greater_than_ten">%1$s %2$d %3$d %4$d:%5$d</string>
+    <string name="no_due_is_set">No due date is set</string>
+    <string name="enter_title">Nama item</string>
+    <string name="note">catatan</string>
+    <string name="pick_a_due_date">Tanggal jatuh tempo</string>
+    <string name="pick_a_due_time">Jam jatuh tempo</string>
+    <string name="edit_item">edit item</string>
+    <string name="create_item">buat item</string>
 </resources>
