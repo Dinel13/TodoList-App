@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.dinel.todoapp.R
 import com.dinel.todoapp.data.database.TodoItem
+import com.dinel.todoapp.notification.NotificationUtils
 import com.dinel.todoapp.utilities.Constants
 import com.dinel.todoapp.utilities.convertMillis
 import com.dinel.todoapp.utilities.convertNumberToMonthName
@@ -102,7 +103,9 @@ class AddEditTodoItemActivity : AppCompatActivity() {
             intent.putExtra(Constants.KEY_INTENT, todo)
             setResult(RESULT_OK, intent)
 
-
+            if (todo.dueTime!! > 0) {
+                NotificationUtils().setNotification(todo, this)
+            }
 
             finish()
         }
