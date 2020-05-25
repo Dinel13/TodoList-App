@@ -57,7 +57,7 @@
             android:textSize="20sp"
             android:gravity="center"
             android:text="@string/pick_a_due_date"
-            android:layout_below="@id/til_todo_title"
+            android:layout_below="@id/til_todo_description"
             android:layout_marginTop="10dp"/>
 
 

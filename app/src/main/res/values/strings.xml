@@ -9,4 +9,7 @@
     <string name="pick_a_due_time">Jam jatuh tempo</string>
     <string name="edit_item">edit item</string>
     <string name="create_item">buat item</string>
+    <string name="mark_as_incomplete">Tandai belum selesai</string>
+    <string name="mark_as_complete">Tandai sudah selesai</string>
+    <string name="search">Cari...</string>
 </resources>
