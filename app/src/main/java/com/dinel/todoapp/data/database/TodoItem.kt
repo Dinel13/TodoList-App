@@ -12,4 +12,5 @@ data class TodoItem(@PrimaryKey(autoGenerate = true) val id: Long?,
                     @ColumnInfo(name = "title") val title: String,
                     @ColumnInfo(name = "note") val note: String?,
                     @ColumnInfo(name = "due") val dueTime: Long?,
+                    @ColumnInfo(name = "dibuat") val dibuat: Long?,
                     @ColumnInfo(name = "completed") var completed: Boolean): Parcelable

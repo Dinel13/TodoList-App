@@ -76,11 +76,18 @@ class TodoListAdapter(todoItemClickListener: TodoItemClickListener) :
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindItem(todoItem: TodoItem, listener: TodoItemClickListener) {
             itemView.tv_item_title.text = todoItem.title
+           // itemView.tv_item_dibuat.text = todoItem.dibuat.toString()
             itemView.checkbox_item.isChecked = todoItem.completed
 
             if (todoItem.completed) {
                 // Strike through the text to give an indicator that task is completed.
                 itemView.tv_item_title.apply {
+                    paintFlags = paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                }
+                itemView.tv_item_dibuat.apply {
+                    paintFlags = paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                }
+                itemView.tv_dibuat.apply {
                     paintFlags = paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                 }
                 itemView.tv_item_due_date.apply {
@@ -91,6 +98,12 @@ class TodoListAdapter(todoItemClickListener: TodoItemClickListener) :
                 }
             } else {
                 itemView.tv_item_title.apply {
+                    paintFlags = paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+                }
+                itemView.tv_item_dibuat.apply {
+                    paintFlags = paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+                }
+                itemView.tv_dibuat.apply {
                     paintFlags = paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
                 }
                 itemView.tv_item_due_date.apply {
@@ -131,6 +144,38 @@ class TodoListAdapter(todoItemClickListener: TodoItemClickListener) :
             } else {
                 itemView.tv_item_due_date.text =
                     itemView.context.getString(R.string.no_due_is_set)
+            }
+
+            if (todoItem.dibuat!!.toInt() != 0) {
+                val dateValues = convertMillis(todoItem.dibuat)
+                val displayFormat: String
+
+                if (dateValues[4] < 10) {
+                    displayFormat = String
+                        .format(
+                            itemView.context.getString(R.string.due_date_minute_less_than_ten),
+                            convertNumberToMonthName(dateValues[1]),
+                            dateValues[0],
+                            dateValues[2],
+                            dateValues[3],
+                            dateValues[4]
+                        )
+                } else {
+                    displayFormat = String
+                        .format(
+                            itemView.context.getString(R.string.due_date_minute_greater_than_ten),
+                            convertNumberToMonthName(dateValues[1]),
+                            dateValues[0],
+                            dateValues[2],
+                            dateValues[3],
+                            dateValues[4]
+                        )
+                }
+
+                itemView.tv_item_dibuat.text = displayFormat
+            } else {
+                itemView.tv_item_dibuat.text =
+                    itemView.context.getString(R.string.jam_bermasalah)
             }
 
             itemView.setOnClickListener {
