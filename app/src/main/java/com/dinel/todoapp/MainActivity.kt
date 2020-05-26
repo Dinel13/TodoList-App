@@ -10,13 +10,11 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.Window
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dinel.todoapp.R
 import com.dinel.todoapp.adapters.TodoListAdapter
 import com.dinel.todoapp.data.database.TodoItem
 import com.dinel.todoapp.notification.NotificationUtils
@@ -27,6 +25,7 @@ import com.dinel.todoapp.viewmodel.TodoViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.todo_item_display_details_dialog.*
 import kotlinx.android.synthetic.main.todo_list.*
+
 
 class MainActivity : AppCompatActivity(), TodoListAdapter.TodoItemClickListener {
 
@@ -133,6 +132,24 @@ class MainActivity : AppCompatActivity(), TodoListAdapter.TodoItemClickListener 
 
         })
         return true
+    }
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.me -> {
+                displayTodoItemCountDialog()
+            }
+        }
+        return true
+    }
+
+    private fun displayTodoItemCountDialog() {
+        countDialog = Dialog(this)
+        countDialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        countDialog!!.setCancelable(true)
+        countDialog!!.setContentView(R.layout.activity_about)
+
+
+        countDialog!!.show()
     }
 
 

@@ -10,5 +10,12 @@
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/me"
+        android:icon="@drawable/ic_account_circle_black_24dp"
+        android:orderInCategory="100"
+        android:title="@string/aboutme"
+        app:showAsAction="ifRoom" />
+
 
 </menu>
