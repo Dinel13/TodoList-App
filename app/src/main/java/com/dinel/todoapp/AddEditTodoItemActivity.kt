@@ -113,16 +113,16 @@ class AddEditTodoItemActivity : AppCompatActivity() {
 
     private fun validateFields(): Boolean {
         if (et_todo_title.text.isEmpty()) {
-            til_todo_title.error = "Please enter title"
+            til_todo_title.error = "Masukkan nama item"
             et_todo_title.requestFocus()
             return false
         }
         if (et_todo_description.text.isEmpty()) {
-            til_todo_description.error = "Please enter description"
+            til_todo_description.error = "Masukkan catatan item"
             et_todo_description.requestFocus()
             return false
         }
-        Toast.makeText(this, "Item is saved successfully.", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Item berhasil disimpan.", Toast.LENGTH_SHORT).show()
         return true
     }
 
@@ -154,7 +154,7 @@ class AddEditTodoItemActivity : AppCompatActivity() {
             DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
 
                 tv_todo_due_date.text =
-                    ("""Due Date: ${convertNumberToMonthName(monthOfYear)} $dayOfMonth $year""")
+                    ("""Jatuh Tempo: ${convertNumberToMonthName(monthOfYear)} $dayOfMonth $year""")
 
                 mDueDay = dayOfMonth
                 mDueMonth = monthOfYear
@@ -178,12 +178,12 @@ class AddEditTodoItemActivity : AppCompatActivity() {
                 mDueMinute = minute
 
                 val displayFormat: String = if (mDueMinute < 10 && mDueHour < 10) {
-                    """Due time: 0$hourOfDay : 0$mDueMinute"""
+                    """Jam: 0$hourOfDay : 0$mDueMinute"""
                 } else {
                     if (mDueMinute > 10 ) {
-                        """Due time: $hourOfDay : $mDueMinute"""
+                        """Jam: $hourOfDay : $mDueMinute"""
                     } else {
-                        """Due time: $hourOfDay : 0$mDueMinute"""
+                        """Jam: $hourOfDay : 0$mDueMinute"""
                     }
                 }
 

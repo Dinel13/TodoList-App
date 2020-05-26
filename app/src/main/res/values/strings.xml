@@ -2,7 +2,7 @@
     <string name="app_name">todoApp</string>
     <string name="due_date_minute_less_than_ten">%1$s %2$d %3$d %4$d:0%5$d</string>
     <string name="due_date_minute_greater_than_ten">%1$s %2$d %3$d %4$d:%5$d</string>
-    <string name="no_due_is_set">No due date is set</string>
+    <string name="no_due_is_set">jatuh tempo belum ditentukan</string>
     <string name="enter_title">Nama item</string>
     <string name="note">catatan</string>
     <string name="pick_a_due_date">Tanggal jatuh tempo</string>
@@ -12,4 +12,9 @@
     <string name="mark_as_incomplete">Tandai belum selesai</string>
     <string name="mark_as_complete">Tandai sudah selesai</string>
     <string name="search">Cari...</string>
+    <string name="create_items">Buat item</string>
+    <string name="image">image</string>
+    <string name="how_many_item_do_you_want_to_create">berapa banyak item yang akan dibuat</string>
+    <string name="cancel">batal</string>
+    <string name="create">buat</string>
 </resources>

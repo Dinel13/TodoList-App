@@ -11,7 +11,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:fontFamily="sans-serif"
-        android:text="Title:"
+        android:text="Nama:"
         android:textColor="#B22222"
         android:textSize="14sp"
         android:textStyle="normal" />
@@ -37,7 +37,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:fontFamily="sans-serif"
-        android:text="Description:"
+        android:text="Catatan:"
         android:textColor="#B22222"
         android:textSize="14sp"
         android:textStyle="normal" />
@@ -64,7 +64,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:fontFamily="sans-serif"
-        android:text="Due:"
+        android:text="Jatuh tempo:"
         android:textColor="#B22222"
         android:textSize="14sp"
         android:textStyle="normal" />
@@ -100,7 +100,7 @@
             android:clickable="true"
             android:focusable="true"
             android:gravity="center"
-            android:text="EDIT"
+            android:text="Edit"
             android:textColor="#B22222"
             android:textStyle="bold" />
 

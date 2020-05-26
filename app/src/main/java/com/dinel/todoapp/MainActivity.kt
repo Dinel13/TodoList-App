@@ -1,10 +1,16 @@
 package com.dinel.todoapp
 
+import android.app.Activity
 import android.app.Dialog
+import android.app.SearchManager
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.Window
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
@@ -72,7 +78,11 @@ class MainActivity : AppCompatActivity(), TodoListAdapter.TodoItemClickListener 
                 displayEmptyTaskListImage()
             }
         })
-
+        fab_add_item.setOnClickListener {
+            clearSearchView()
+            val intent = Intent(this@MainActivity, AddEditTodoItemActivity::class.java)
+            startActivityForResult(intent, Constants.INTENT_CREATE_TODO_ITEM)
+        }
 
     }
 
@@ -82,27 +92,49 @@ class MainActivity : AppCompatActivity(), TodoListAdapter.TodoItemClickListener 
         dialog?.dismiss()
         countDialog?.dismiss()
     }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            val todoItem = data?.getParcelableExtra<TodoItem>(Constants.KEY_INTENT)!!
+            when (requestCode) {
+                Constants.INTENT_CREATE_TODO_ITEM -> {
+                    todoViewModel.saveTodoItem(todoItem)
 
+                    hideEmptyTaskListImage()
+                }
+                Constants.INTENT_EDIT_TODO_ITEM -> {
 
-
-
-    private fun createMockTodoItems(count: Int) {
-        val todoList = mutableListOf<TodoItem>()
-
-        for (index in 0..count) {
-            todoList.add(
-                TodoItem(
-                    null,
-                    "Nama $index",
-                    "Catatan $index",
-                    0,
-                    false
-                )
-            )
+                    todoViewModel.updateTodoItem(todoItem)
+                }
+            }
         }
-
-        todoViewModel.saveTodoItems(todoList)
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_todo_search, menu)
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        searchView = menu?.findItem(R.id.search_todo)
+            ?.actionView as SearchView
+        searchView.setSearchableInfo(
+            searchManager
+                .getSearchableInfo(componentName)
+        )
+        searchView.maxWidth = Integer.MAX_VALUE
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                todoAdapter.filter.filter(query)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                todoAdapter.filter.filter(newText)
+                return false
+            }
+
+        })
+        return true
+    }
+
 
     private fun clearSearchView() {
         if (!searchView.isIconified) {
@@ -126,7 +158,7 @@ class MainActivity : AppCompatActivity(), TodoListAdapter.TodoItemClickListener 
     }
 
     override fun onCheckClicked(todoItem: TodoItem) {
-         if (!todoItem.completed) {
+        if (!todoItem.completed) {
             NotificationUtils().cancelNotification(todoItem, this)
         } else if (todoItem.completed && todoItem.dueTime!! > 0 && System.currentTimeMillis() < todoItem.dueTime) {
             NotificationUtils().setNotification(todoItem, this)
@@ -199,11 +231,17 @@ class MainActivity : AppCompatActivity(), TodoListAdapter.TodoItemClickListener 
         dialog!!.show()
     }
 
-    
+
 
     private fun displayEmptyTaskListImage() {
         if (iv_empty_task_list.visibility == View.GONE) {
             iv_empty_task_list.visibility = View.VISIBLE
+        }
+    }
+
+    private fun hideEmptyTaskListImage() {
+        if (iv_empty_task_list.visibility == View.VISIBLE) {
+            iv_empty_task_list.visibility = View.GONE
         }
     }
 }
