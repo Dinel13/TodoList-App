@@ -23,10 +23,6 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
         repository.updateTodoItem(todoItem)
     }
 
-    fun updateTodoIt() {
-        repository.apply {  }
-    }
-
     fun deleteTodoItem(todoItem: TodoItem) {
         repository.deleteTodoItem(todoItem)
     }

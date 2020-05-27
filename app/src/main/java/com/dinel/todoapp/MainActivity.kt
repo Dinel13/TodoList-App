@@ -36,8 +36,6 @@ class MainActivity : AppCompatActivity(), TodoListAdapter.TodoItemClickListener 
 
     private var dialog: Dialog? = null
     private var countDialog: Dialog? = null
-    private var sortByDibuat: Boolean = false
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,7 +59,12 @@ class MainActivity : AppCompatActivity(), TodoListAdapter.TodoItemClickListener 
                 }
             }
 
-            it.sortBy { it.dueTime }
+
+            if (!Constants.urut) {
+                it.sortBy { it.dueTime }
+            } else {
+                it.sortBy { it.dibuat }
+            }
 
             for (item in itemsWithNoDeadline) {
                 it.remove(item)
@@ -145,9 +148,15 @@ class MainActivity : AppCompatActivity(), TodoListAdapter.TodoItemClickListener 
                 displayTodoItemCountDialog()
             }
             R.id.sortByTempo -> {
+                Constants.urut = false
+                val intent = Intent(this@MainActivity, MainActivity::class.java)
+                startActivity(intent)
             }
 
             R.id.sortByBuat -> {
+                Constants.urut = true
+                val intent = Intent(this@MainActivity, MainActivity::class.java)
+                startActivity(intent)
             }
         }
         return true
