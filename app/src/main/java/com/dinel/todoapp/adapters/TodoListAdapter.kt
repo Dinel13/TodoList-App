@@ -146,7 +146,7 @@ class TodoListAdapter(todoItemClickListener: TodoItemClickListener) :
                     itemView.context.getString(R.string.no_due_is_set)
             }
 
-            if (todoItem.diupdate == true){
+            if (todoItem.diupdate){
                 itemView.tv_dibuat.text ="Diupdate"
             }
             if (todoItem.dibuat!!.toInt() != 0) {
