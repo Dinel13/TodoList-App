@@ -10,6 +10,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.Window
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
@@ -35,6 +36,8 @@ class MainActivity : AppCompatActivity(), TodoListAdapter.TodoItemClickListener 
 
     private var dialog: Dialog? = null
     private var countDialog: Dialog? = null
+    private var sortByDibuat: Boolean = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,6 +61,8 @@ class MainActivity : AppCompatActivity(), TodoListAdapter.TodoItemClickListener 
                 }
             }
 
+            it.sortBy { it.dueTime }
+
             for (item in itemsWithNoDeadline) {
                 it.remove(item)
             }
@@ -66,7 +71,6 @@ class MainActivity : AppCompatActivity(), TodoListAdapter.TodoItemClickListener 
                 it.remove(item)
             }
 
-            it.sortBy { it.dueTime }
 
             it.addAll(itemsWithNoDeadline)
             it.addAll(completedItems)
@@ -91,6 +95,7 @@ class MainActivity : AppCompatActivity(), TodoListAdapter.TodoItemClickListener 
         dialog?.dismiss()
         countDialog?.dismiss()
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
@@ -133,10 +138,16 @@ class MainActivity : AppCompatActivity(), TodoListAdapter.TodoItemClickListener 
         })
         return true
     }
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.me -> {
                 displayTodoItemCountDialog()
+            }
+            R.id.sortByTempo -> {
+            }
+
+            R.id.sortByBuat -> {
             }
         }
         return true
@@ -174,6 +185,7 @@ class MainActivity : AppCompatActivity(), TodoListAdapter.TodoItemClickListener 
 
     }
 
+
     override fun onCheckClicked(todoItem: TodoItem) {
         if (!todoItem.completed) {
             NotificationUtils().cancelNotification(todoItem, this)
@@ -182,6 +194,10 @@ class MainActivity : AppCompatActivity(), TodoListAdapter.TodoItemClickListener 
         }
 
         todoViewModel.toggleCompleteState(todoItem)
+    }
+
+    override fun onterrr(todoItem: TodoItem) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     private fun displayEventDetails(todoItem: TodoItem) {
@@ -247,7 +263,6 @@ class MainActivity : AppCompatActivity(), TodoListAdapter.TodoItemClickListener 
 
         dialog!!.show()
     }
-
 
 
     private fun displayEmptyTaskListImage() {

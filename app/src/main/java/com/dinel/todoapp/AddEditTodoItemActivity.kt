@@ -18,6 +18,7 @@ import com.dinel.todoapp.utilities.convertMillis
 import com.dinel.todoapp.utilities.convertNumberToMonthName
 import com.dinel.todoapp.utilities.dateToMillis
 import kotlinx.android.synthetic.main.activity_add_edit_todo_item.*
+import kotlinx.android.synthetic.main.item_todo_list.*
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -36,6 +37,8 @@ class AddEditTodoItemActivity : AppCompatActivity() {
     private var dateSelected = false
     private var timeSelected = false
 
+    private var diupdated = false
+
     var todoItem: TodoItem? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,6 +49,7 @@ class AddEditTodoItemActivity : AppCompatActivity() {
         if (intent != null && intent.hasExtra(Constants.KEY_INTENT)) {
             val todoItem: TodoItem = intent.getParcelableExtra(Constants.KEY_INTENT)
             this.todoItem = todoItem
+            diupdated = true
 
             if (todoItem.dueTime!!.toInt() != 0) {
                 dateSelected = true
@@ -60,7 +64,7 @@ class AddEditTodoItemActivity : AppCompatActivity() {
             }
 
             fillUIWithItemData(todoItem)
-        }
+          }
 
         tv_todo_due_date.setOnClickListener {
             showDatePickerDialog()
@@ -114,14 +118,15 @@ class AddEditTodoItemActivity : AppCompatActivity() {
                 note = et_todo_description.text.toString(),
                 dueTime = dueDate,
                 dibuat = getMilliFromDate("yyyy MM dd HH.mm"),
-                completed = todoItem?.completed ?: false
+                completed = todoItem?.completed ?: false,
+                diupdate = diupdated
             )
 
             val intent = Intent()
             intent.putExtra(Constants.KEY_INTENT, todo)
             setResult(RESULT_OK, intent)
 
-            if (todo.dueTime!! > 0) {
+            if (todo.dueTime!! > 1) {
                 NotificationUtils().setNotification(todo, this)
             }
 
@@ -237,6 +242,7 @@ class AddEditTodoItemActivity : AppCompatActivity() {
 
             tv_todo_due_date.text = """${dueMonth} ${dateValues[0]} ${dueYear}"""
             tv_todo_due_time.text = """${dueHour} : ${dueMinute}"""
+
         }
     }
 }
