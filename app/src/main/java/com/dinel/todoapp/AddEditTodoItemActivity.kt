@@ -128,7 +128,7 @@ class AddEditTodoItemActivity : AppCompatActivity() {
             setResult(RESULT_OK, intent)
 
             if (todo.dueTime!! > 1) {
-                NotificationUtils().setNotifiaaaacation(todo, this)
+                NotificationUtils().setNotification(todo, this)
             }
 
             finish()
